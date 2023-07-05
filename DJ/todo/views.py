@@ -2,9 +2,12 @@ from django.shortcuts import render,HttpResponse
 
 # Create your views here.
 def home(req):
-    return HttpResponse("<h1>Hi Django</h1>")
+    return render(req,'home.html',{"name":"python"})
 
 
 def about(req):
-    return HttpResponse("<h1>TODO About page</h1>")
+    return render(req,'about.html',{"isDone":'z'})
+
+def work(req):
+    return render(req,'work.html')
 

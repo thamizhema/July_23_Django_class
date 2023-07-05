@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+<!--  -->
+{% block content %}
+<h1>about page</h1>
+<div>
+  <!--  -->
+  {% if isDone == 't' %}
+
+  <h1>isDone is t</h1>
+  {% elif isDone == "w" %}
+
+  <h1>isDone is w</h1>
+  {% else %}
+  <h1>isDone is False</h1>
+  <!--  -->
+  {% endif %}
+</div>
+{% endblock %}
