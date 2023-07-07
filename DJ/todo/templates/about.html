@@ -16,4 +16,8 @@
   <!--  -->
   {% endif %}
 </div>
-{% endblock %}
+
+<h1>==================</h1>
+{% for user in users %}
+<a href="{% url 'info' uname=user.name %}"><h3>{{ user.name }}</h3></a>
+{% endfor %} {% endblock %}

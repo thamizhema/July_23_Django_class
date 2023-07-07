@@ -2,7 +2,10 @@
 <!--  -->
 {% block content %}
 <!--  -->
-{% load static %}
-<h1>work page</h1>
-<img class="img-1" src="{% static 'images/img.jpg' %}" alt="" />
+<a href="{% url 'home' %}">HHOOMMEE</a>
+{% for i in data %}
+
+<div class="box">{{ i }}</div>
+{% endfor %}
+<!--  -->
 {% endblock %}
