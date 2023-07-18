@@ -1,4 +1,9 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
+from bson.objectid import ObjectId
+import datetime
+from .models import uc
+
+
 
 # Create your views here.
 def home(req):
@@ -16,16 +21,35 @@ def about(req):
     return render(req,'about.html',{"isDone":'z',"users":users})
 
 def work(req):
-    return render(req,'work.html',{"data":["s",1,2,3,4]})
+
+    if(req.method == "POST"):
+        username = req.POST['username']
+        email = req.POST['email']
+        password = req.POST['password']
+        x = datetime.datetime.now()
+       
+        data = {"username":username,"email":email,"password":password,"date":x.strftime("%d-%B-%y %X")}
+        print(data)
+        uc.insert_one(data)
+        print("------------------")
+        return redirect("work")
+
+    return render(req,'work.html')
 
 
-def viewUser(req,uname):
-    print(uname)
-    ud = {}
-    for i in users:
-        if(i['name'] == uname):
-            ud = i
-            break
-    return render(req,'info.html',{"info":ud})
+def viewUser(req):
+    dbData = list(uc.find())
+    datas = []
+    for i in dbData:
+        docId = str(i["_id"])
+        i['docId'] = docId
+        datas.append(i)
+    
+    return render(req,'info.html',{"datas":datas})
 
 
+
+def deleteUser(req,id):
+    print(id,"docId for delete operation")
+    uc.delete_one({"_id":ObjectId(id)})
+    return redirect("info")
