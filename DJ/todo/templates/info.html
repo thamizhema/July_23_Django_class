@@ -8,7 +8,7 @@
 
 <div class="box">
   <div class="title">
-    <a href="">Update</a>
+    <a href="{% url 'update_user' id=i.docId %}">Update</a>
     <h1 style="display: inline">{{ i.username }}</h1>
     {{ i.docId }}
     <a href="{% url 'deleteuser' id=i.docId %}">delete</a>
